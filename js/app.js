@@ -9,6 +9,21 @@ var main = function () {
                       "cnx": {lat: 18.7883,long: 98.9853}};
     var weatherChart = function(city,mode){
         console.log("City: "+city+" Mode: "+mode);
+        if(current_city!==city){
+            $("div.city button").toggleClass("active");
+            current_city = city;
+        }
+        if(current_mode!==mode){
+            $("div.mode button").toggleClass("active");
+            current_mode = mode;
+        }
+        //Chart Title Part
+        var city_name,mode_name;
+        if(current_city==="bkk"){ city_name = "Bangkok";}
+        if(current_city==="cnx"){ city_name = "Chiang Mai";}
+        if(current_mode==="3hours"){ mode_name = "Every 3 Hours";}
+        if(current_mode==="daily"){ mode_name = "Daily";}
+        $("h1.title").text("Weather in "+city_name+", "+mode_name);
         //Call API
         $.ajax({ 
             url: "https://api.nostramap.com/Service/V2/GeoLocation/GetWeather", 
@@ -51,22 +66,16 @@ var main = function () {
                 options: { 
                     legend: {display: false}, title: {display: false}}
             });
-
-            if(current_city!==city){
-                $("div.city button").toggleClass("active");
-                current_city = city;
-            }
-            if(current_mode!==mode){
-                $("div.mode button").toggleClass("active");
-                current_mode = mode;
-            }
-            //Chart Title Part
-            var city_name,mode_name;
-            if(current_city==="bkk"){ city_name = "Bangkok";}
-            if(current_city==="cnx"){ city_name = "Chiang Mai";}
-            if(current_mode==="3hours"){ mode_name = "Every 3 Hours";}
-            if(current_mode==="daily"){ mode_name = "Daily";}
-            $("h1.title").text("Weather in "+city_name+", "+mode_name);
+            //Weather Icon Part
+            var $weathericon = $(".weather-icon");
+            var margin_right;
+            if(mode==="daily"){$weathericon.css("left","130px"); margin_right = "76px";}
+            if(mode==="3hours"){$weathericon.css("left","124px");margin_right = "60px";}
+            $weathericon.empty();
+            weatherIcons.forEach(element => {
+                $weathericon.append($("<img>").attr("src",element));
+            });
+            $("img").css("margin-right",margin_right);
         },
         error: function (response){window.alert(response.errorMessage);}
         });

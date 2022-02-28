@@ -2,13 +2,19 @@
     font-family: 'Rubik', sans-serif;
 }
 body{
-    margin: 1rem;
+    margin: 16px;
 }
 h1{
     text-align: center;
 }
 .graph{
-    margin: 1rem;
+    margin: 16px;
+}
+.weather-icon{
+    position: absolute;
+    left: 130px;
+    top: 450px;
+    display: inline;
 }
 .city{
     float: left;
@@ -24,7 +30,7 @@ button{
     background: grey;
     border: 0px;
     border-radius: 3pt;
-    padding: 0.5rem;
+    padding: 12px;
 }
 button:hover{
     background: darkgrey;
