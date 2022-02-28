@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather | Midterm Project</title>
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="title">Weather in Bangkok, Daily</h1>
+    <div class="graph">
+        <canvas id="weather-chart" style="width:1000px;max-width:1000px"></canvas>
+    </div>
+    <div class="city">
+        <button class="bkk active">BKK</button>
+        <button class="cnx">CNX</button>
+    </div>
+    <div class="mode">
+        <button class="3hrs">3 Hours</button>
+        <button class="daily active">Daily</button>
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+*{
+    font-family: 'Rubik', sans-serif;
+}
+body{
+    margin: 1rem;
+}
+h1{
+    text-align: center;
+}
+.graph{
+    margin: 1rem;
+}
+.city{
+    float: left;
+    text-align: left;
+}
+.mode{
+    text-align: right;
+    float: right;
+}
+button{
+    font-size: 12pt;
+    color: white;
+    background: grey;
+    border: 0px;
+    border-radius: 3pt;
+    padding: 0.5rem;
+}
+button:hover{
+    background: darkgrey;
+}
+button.active{
+    background: green;
+}
+button.active:hover{
+    background: darkgreen;
+}
