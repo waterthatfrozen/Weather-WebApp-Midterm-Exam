@@ -4,7 +4,9 @@ var main = function () {
     var current_mode = "daily";
     var xValues = [];
     var yValues = [];
+    var barColor = [];
     var weatherIcons = [];
+    var weatherDescription = [];
     var city_coord = {"bkk": {lat: 13.7563,long: 100.5018},
                       "cnx": {lat: 18.7883,long: 98.9853}};
     var weatherChart = function(city,mode){
@@ -39,12 +41,14 @@ var main = function () {
         success: function (response){
             //Create data for new chart
             var weather = response.results.weather;
-            xValues = []; yValues = []; weatherIcons = [];
+            xValues = []; yValues = []; weatherIcons = []; weatherDescription = []; barColor = [];
             if(mode==="daily"){
                 weather.forEach(element => {
                     xValues.push(element.timeStamp);
                     yValues.push(element.temperature.temp);
                     weatherIcons.push(element.icon);
+                    weatherDescription.push(element.description);
+                    barColor.push("lightblue");
                 });
             }
             if(mode==="3hours"){
@@ -52,8 +56,17 @@ var main = function () {
                     xValues.push(weather[i].timeStamp);
                     yValues.push(weather[i].temperature.temp);
                     weatherIcons.push(weather[i].icon);
+                    weatherDescription.push(weather[i].description);
+                    barColor.push("lightblue");
                 }
             }
+            //Find min and max to change color of bar chart. Min -> green, Max -> red.
+            var minTemp = Math.min.apply(null,yValues);
+            var maxTemp = Math.max.apply(null,yValues);
+            var minTempIndex = yValues.indexOf(minTemp);
+            var maxTempIndex = yValues.indexOf(maxTemp);
+            barColor[minTempIndex] = "lightgreen";
+            barColor[maxTempIndex] = "pink";
             //Chart Part
             $(".graph").empty();
             $(".graph").append($("<canvas id='weather-chart'>").attr("style","width:1000px;max-width:1000px;"));
@@ -61,19 +74,22 @@ var main = function () {
                 type: "bar",
                 data: {
                     labels: xValues,
-                    datasets: [{ backgroundColor: "lightblue", data: yValues}]
+                    datasets: [{ backgroundColor: barColor, data: yValues}]
                 },
                 options: { 
                     legend: {display: false}, title: {display: false}}
             });
             //Weather Icon Part
             var $weathericon = $(".weather-icon");
-            var margin_right;
-            if(mode==="daily"){$weathericon.css("left","130px"); margin_right = "76px";}
-            if(mode==="3hours"){$weathericon.css("left","124px");margin_right = "60px";}
+            var margin_right,padding_left;
+            if(mode==="daily"){padding_left = "5rem";margin_right = "76px";}
+            if(mode==="3hours"){padding_left = "3.5rem";margin_right = "61px";}
             $weathericon.empty();
+            $weathericon.css("padding-left",padding_left);
+            var descIndex = 0;
             weatherIcons.forEach(element => {
-                $weathericon.append($("<img>").attr("src",element));
+                $weathericon.append($("<img>").attr({src:element, title:weatherDescription[descIndex]}));
+                descIndex++;
             });
             $("img").css("margin-right",margin_right);
         },
