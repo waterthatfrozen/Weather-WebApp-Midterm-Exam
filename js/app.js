@@ -20,11 +20,8 @@ var main = function () {
             current_mode = mode;
         }
         //Chart Title Part
-        var city_name,mode_name;
-        if(current_city==="bkk"){ city_name = "Bangkok";}
-        if(current_city==="cnx"){ city_name = "Chiang Mai";}
-        if(current_mode==="3hours"){ mode_name = "Every 3 Hours";}
-        if(current_mode==="daily"){ mode_name = "Daily";}
+        var city_name = (current_city === "bkk") ? "Bangkok":"Chiang Mai";
+        var mode_name = (current_mode === "3hours") ? "Every 3 Hours":"Daily";
         $("h1.title").text("Weather in "+city_name+", "+mode_name);
         //Call API
         $.ajax({ 
@@ -81,9 +78,8 @@ var main = function () {
             });
             //Weather Icon Part
             var $weathericon = $(".weather-icon");
-            var margin_right,padding_left;
-            if(mode==="daily"){padding_left = "5rem";margin_right = "76px";}
-            if(mode==="3hours"){padding_left = "3.5rem";margin_right = "61px";}
+            var margin_right = (mode === "3hours") ? "61px":"76px";
+            var padding_left = (mode === "3hours") ? "3.5rem":"5rem";
             $weathericon.empty();
             $weathericon.css("padding-left",padding_left);
             var descIndex = 0;
