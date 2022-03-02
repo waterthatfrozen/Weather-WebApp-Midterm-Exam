@@ -2,41 +2,39 @@
     font-family: 'Rubik', sans-serif;
 }
 body{
-    margin: 16px;
+    margin: 1rem;
+    background-color: lightyellow;
 }
 h1{
     text-align: center;
 }
-.graph{
-    margin: 16px;
+canvas{
+    margin: auto;
 }
 .weather-icon{
-    position: absolute;
-    left: 130px;
-    top: 450px;
-    display: inline;
+    margin: auto;
+    text-align: center;
 }
 .city{
     float: left;
-    text-align: left;
 }
 .mode{
-    text-align: right;
     float: right;
 }
 button{
-    font-size: 12pt;
+    font-size: 14pt;
     color: white;
     background: grey;
     border: 0px;
     border-radius: 3pt;
-    padding: 12px;
+    padding: 0.75rem;
 }
 button:hover{
     background: darkgrey;
 }
 button.active{
     background: green;
+    font-weight: bold;
 }
 button.active:hover{
     background: darkgreen;
